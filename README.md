@@ -1,5 +1,5 @@
 # Technical Test Frontend Hara Anargya
-
+## nama : Rayhan Alsauqi
 ## Installation
 * Fork Repo ini
 * Clone Repo ini
