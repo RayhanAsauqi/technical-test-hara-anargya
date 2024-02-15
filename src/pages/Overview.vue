@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive } from "vue";
+import { ref } from "vue";
 import provinces from "../assets/js/province.js";
 import dataCity from "../assets/js/city";
 
@@ -9,6 +9,7 @@ const provinceName = ref("");
 
 const sortType = ref("id_asc");
 const cities = ref([]);
+console.log(cities);
 
 const sortedProvinces = ref([]);
 
@@ -20,11 +21,17 @@ const showCities = () => {
 };
 
 const showProvince = () => {
-  const selectedProvince = cities.value.find(
-    (province) => province.provinsi_id === cityId.value
+  const selectedCity = cities.value.find(
+    (city) => city.id === parseInt(cityId.value)
   );
-  provinceName.value = selectedProvince;
-  return provinceName.value;
+  if (selectedCity) {
+    const province = provinces.find(
+      (province) => province.id === selectedCity.provinsi_id
+    );
+    provinceName.value = province ? province.name : "Province Not Found";
+  } else {
+    provinceName.value = "Province Not Found";
+  }
 };
 
 const sortProvinces = () => {
@@ -49,7 +56,7 @@ const sortProvinces = () => {
 </script>
 
 <template>
-  <div class="overview-container">
+  <div class="overview- flex">
     <div class="section border">
       <h2 class="text-xl font-medium leading-[19.36px] text-[#424242]">
         Show Cities by Province ID
@@ -70,7 +77,7 @@ const sortProvinces = () => {
       <div class="result">
         <p>Province Name:</p>
         <p>
-          {{ provinceName.name }}
+          {{ provinceName }}
         </p>
       </div>
       {
