@@ -1,9 +1,10 @@
 <script setup>
 import { ref } from "vue";
 import provinces from "../assets/js/province.js";
+import CardCity from "../components/Card/CardCity/index.vue";
 import dataCity from "../assets/js/city";
 
-const provinceId = ref(0);
+const provinceId = ref("");
 const cityId = ref("");
 const provinceName = ref("");
 
@@ -56,96 +57,73 @@ const sortProvinces = () => {
 </script>
 
 <template>
-  <div class="overview- flex">
-    <div class="section border">
-      <h2 class="text-xl font-medium leading-[19.36px] text-[#424242]">
-        Show Cities by Province ID
-      </h2>
-      <label for="provinceId">Province ID:</label>
-      <input v-model="provinceId" type="number" />
-      <button @click="showCities">Show Cities</button>
-      <ul v-for="item in cities" :key="item.id">
-        <li>{{ item.name }}</li>
-        <li>{{ item.id }}</li>
-      </ul>
-    </div>
-    <div class="section border">
-      <h2>Show Province by City ID:</h2>
-      <label for="cityId">City ID:</label>
-      <input v-model="cityId" type="number" />
-      <button @click="showProvince">Show Province</button>
-      <div class="result">
-        <p>Province Name:</p>
-        <p>
-          {{ provinceName }}
-        </p>
+  <div class="overview- grid gap-2">
+    <CardCity />
+    <!-- <div class="section border rounded-lg shadow-sm">
+      <div class="px-5 py-6">
+        <h2 class="font-extrabold text-lg leading-[30px] text-[#152544]">
+          Show Cities by Province ID
+        </h2>
+        <div class="grid grid-cols-2 gap-2 pt-5 w-1/2">
+          <form class="">
+            <label
+              for="default-search"
+              class="mb-2 text-sm font-medium sr-only dark:text-white"
+              >Search</label
+            >
+            <div class="relative">
+              <div
+                class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+              >
+                <svg
+                  class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="number"
+                id="default-search"
+                class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg outline-none"
+                placeholder="Input Province ID"
+                v-model="provinceId"
+              />
+            </div>
+          </form>
+
+          <button
+            @click="showCities"
+            class="text-base font-medium leading-[19.36px] text-[#424242] border rounded-lg hover:bg-[#E3F2FD] bg-blue-100 shadow-sm"
+          >
+            Show Cities
+          </button>
+        </div>
+        <div class="">
+          <h2 class="font-extrabold text-md leading-[30px] text-[#152544]">
+            City:
+          </h2>
+          <div class="px-6 py-3 grid grid-cols-2 items-center">
+            <ul
+              class="text-gray-500 list-disc list-inside dark:text-gray-400"
+              v-for="item in cities"
+              :key="item.id"
+            >
+              <li>{{ item.name }} {{ item.id }}</li>
+            </ul>
+          </div>
+        </div>
       </div>
-      {
-    </div>
-    <div class="section">
-      <h2>Sort Provinces:</h2>
-      <label for="sortType">Sort by:</label>
-      <select v-model="sortType">
-        <option value="id_asc">ID (Ascending)</option>
-        <option value="id_desc">ID (Descending)</option>
-        <option value="name_asc">Name (Ascending)</option>
-        <option value="name_desc">Name (Descending)</option>
-      </select>
-      <button @click="sortProvinces">Sort</button>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="province in sortedProvinces" :key="province.id">
-            <td>{{ province.id }}</td>
-            <td>{{ province.name }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    </div> -->
+
   </div>
 </template>
-
-<style scoped>
-/* CSS untuk desain UI */
-body {
-  font-family: Arial, sans-serif;
-}
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-}
-h2 {
-  margin-top: 0;
-}
-label {
-  font-weight: bold;
-}
-input[type="text"] {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #45a049;
-}
-.result {
-  margin-top: 20px;
-}
-</style>
