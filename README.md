@@ -1,5 +1,6 @@
 # Technical Test Frontend Hara Anargya
-
+## Nama : Rayhan Alsauqi
+## Email : reyhanalsauqi12@gmail.com
 ## Installation
 * Fork Repo ini
 * Clone Repo ini
